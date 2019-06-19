@@ -80,5 +80,10 @@ class Image(models.Model):
         fetched_object = Image.objects.filter(editor=current_value).update(editor=new_value)
         return fetched_object
 
+class Followers(models.Model):
+    user = models.CharField(max_length=40,default='')
+    Follower = models.CharField(max_length=40,default='')
+
+
 
         
