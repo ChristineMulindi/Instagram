@@ -25,7 +25,14 @@ class Image(models.Model):
         return fetched_image
 
 
+class Comment(models.Model):
+    post = models.ForeignKey('Image', null=True)
+    comment = models.CharField(max_length=300)
+    posted = models.DateTimeField(auto_now=True)
 
+
+    def __str__(self):
+        return self.comment
 
 
         
