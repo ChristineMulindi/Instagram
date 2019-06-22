@@ -8,3 +8,7 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = ['profile_path', 'bio']
 
+class ImageForm(forms.ModelForm):
+    class Meta:
+        model = Image
+        fields = [ 'title','image','caption']
