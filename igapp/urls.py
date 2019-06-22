@@ -22,5 +22,4 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^',include('instagram.urls')),
     url(r'^accounts/', include('registration.backends.simple.urls')),
-    url(r'^search/',views.get_search, name='get_search'),
 ]
