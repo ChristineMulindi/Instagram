@@ -1,5 +1,5 @@
 from django import forms
-from .models import Profile
+from .models import Profile,Image
 from django.contrib.auth.models import User
 
 
@@ -11,4 +11,4 @@ class ProfileForm(forms.ModelForm):
 class ImageForm(forms.ModelForm):
     class Meta:
         model = Image
-        fields = [ 'title','image','caption']
+        fields = [ 'image','caption']
