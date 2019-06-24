@@ -1,17 +1,19 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
-from .models import Image,Profile
+from .models import Image,Profile,Comment
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
-from .forms import ProfileForm,ImageForm
+from .forms import ProfileForm,ImageForm, CommentForm
 
 
 @login_required
 def home(request):
-    images = Image.objects.all()
+    form = CommentForm()
+    images = Image.objects.all().order_by('-image_created')
     users = User.objects.all()
     current = request.user
-    return render(request, 'index.html',{"images":images, "users":users,'user':current})
+    comments = Comment.objects.all().order_by('-posted')
+    return render(request, 'index.html',{"images":images, "users":users,'user':current, "form": form,'comments':comments})
 
 
 def get_search(request):
@@ -45,7 +47,7 @@ def profile(request, id):
 
 
 @login_required(login_url='/accounts/login/')
-def update_profile(request,id):
+def update_profile(request,id): 
     current_user = request.user
     user = User.objects.get(id=id)
     if request.method == 'POST':
@@ -76,7 +78,23 @@ def post_image(request,id):
 
     else:
         form = ImageForm()
-    return render(request, 'post_image.html', {"user": current_user, "form": form})  
+    return render(request, 'post_image.html', {"user": current_user, "form": form}) 
+
+
+@login_required(login_url='/accounts/login/')
+def post_comment(request,image_id):
+    comments = Comment.objects.filter(post_id=image_id)
+    current_user = request.user
+    current_image = Image.objects.get(id=image_id)
+    if request.method == 'POST':
+        form = CommentForm(request.POST, request.FILES)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post=current_image
+            comment.user=current_user
+            comment.save()
+            print(comments)
+    return redirect(home)
 
 
 def signout(request):
