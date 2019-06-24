@@ -1,5 +1,5 @@
 from django import forms
-from .models import Profile,Image
+from .models import Profile,Image,Comment
 from django.contrib.auth.models import User
 
 
@@ -15,6 +15,8 @@ class ImageForm(forms.ModelForm):
 
 class CommentForm(forms.ModelForm):
 
-    class Meta:
+    comment = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Add comment'}), label='')
+
+    class Meta: 
         model = Comment
-        fields = ['comment']
+        exclude = ('post','posted','user')
