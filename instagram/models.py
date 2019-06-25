@@ -26,6 +26,10 @@ class Profile(models.Model):
     def save_profile(self):
         self.save()
 
+    def delete_profile(self):
+        self.delete()
+
+
     def number_of_followers(self):
         print(self.followers.count())
         if self.followers.count():
@@ -63,6 +67,10 @@ class Image(models.Model):
 
     def save_image(self):
         self.save()
+
+    def delete_image(self):
+        self.delete()
+
 
     @classmethod
     def retrieve_all(cls):
