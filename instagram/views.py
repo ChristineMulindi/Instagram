@@ -17,13 +17,13 @@ def home(request):
 
 
 def get_search(request):
-    
-    if 'searchUser' in request.GET and request.GET["searchUser"]:
-        search_word = request.GET.get("searchUser")
-        searched_user = Profile.search_by_username(search_word)
+    profile = Profile.objects.all
+    if 'user' in request.GET and request.GET["user"]:
+        search_word = request.GET.get("user")
+        searched_users = User.object.filter(username__icontains=search_word)
         message = f"{search_word}"
 
-        return render(request, 'index.html',{"message":message,"all_users": searched_user})
+        return render(request, 'searched.html',{"message":message,"users": searched_users,"profile":profile})
 
     else:
         message = "You haven't searched for anyone"
@@ -72,7 +72,7 @@ def post_image(request,id):
         if form.is_valid():
             image = form.save(commit=False)
             image.editor=current_user
-            image.profile = current_profile
+            image.user_profile = current_profile
             image.save()
         return redirect(home)
 
