@@ -41,7 +41,7 @@ class Profile(models.Model):
 
     @classmethod
     def search_by_username(cls,search_word):
-        get_search = cls.objects.filter(user__username__icontains=search_word)
+        get_search = cls.objects.filter(username__icontains=search_word)
         return get_search
 
     @property
