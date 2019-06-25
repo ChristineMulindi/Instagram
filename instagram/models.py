@@ -55,7 +55,7 @@ class Image(models.Model):
     title = models.CharField(max_length=100, null=True)
     image_created = models.DateTimeField(auto_now=True, auto_now_add=False)
     caption = models.CharField(max_length=220, default="")
-    editor = models.ForeignKey(User,on_delete=models.CASCADE)
+    editor = models.ForeignKey(User,on_delete=models.CASCADE,related_name="cm")
     user_profile = models.ForeignKey(Profile, on_delete=models.CASCADE,null=True)
 
     def __str__(self):
