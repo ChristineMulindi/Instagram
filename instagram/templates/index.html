@@ -16,7 +16,7 @@
 
           <div style="background-color:white;" class=" card-header">
             <img style="border-radius:30px;width:30px;height:30px; background-color:white;" class="rounded-circle"
-              src="{{ user.profile.profile_path.url }}"> &nbsp;{{ user.username }}
+              src="{{image.user_profile.profile_path.url }}"> &nbsp;{{ image.editor }}
 
           </div>
           <img class="card-img-top" style="height: 500px !important" src="{{image.image.url}}" alt="">
@@ -25,53 +25,17 @@
             <p><b style="text-transform: lowercase;">{{ user.username}}</b>&nbsp;{{image.caption}}</p>
             {% for comment in image.comment_set.all %}
 
-            <p><b style="text-transform: lowercase;">{{ user.username}}</b>&nbsp;{{comment.comment}}</p>
+            <p><img style="border-radius:30px;width:30px;height:30px;" class="rounded-circle"
+                src="{{image.user_profile.profile_path.url }}">&nbsp;<b
+                style="text-transform: lowercase;">{{ image.editor}}</b>&nbsp;{{comment.comment}}</p>
 
             {% endfor %}
           </div>
-
-
           <div style="background-color:white;" class="card-footer">
             <form action="post/comment/{{image.id}}" method="post" enctype="multipart/form-data" class="form"
               placeholder="Add Comment">
               {% csrf_token %}
-              {% bootstrap_form form %}
-              &nbsp;
-              &nbsp;
-             
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
-              &nbsp;
+              {% bootstrap_form form %}  
               <button class="btn btn-primary" type="submit">Post</button>
             </form>
           </div>
@@ -91,10 +55,4 @@
   {% endfor %}
   <br>
 </div>
-
-
-
-
-
-
 {% endblock %}
