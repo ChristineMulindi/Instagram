@@ -26,8 +26,8 @@
             {% for comment in image.comment_set.all %}
 
             <p><img style="border-radius:30px;width:30px;height:30px;" class="rounded-circle"
-                src="{{image.user_profile.profile_path.url }}">&nbsp;<b
-                style="text-transform: lowercase;">{{ image.editor}}</b>&nbsp;{{comment.comment}}</p>
+                src="{{comment.user.profile.profile_path.url }}">&nbsp;<b
+                style="text-transform: lowercase;">{{ comment.user.username}}</b>&nbsp;{{comment.comment}}</p>
 
             {% endfor %}
           </div>
