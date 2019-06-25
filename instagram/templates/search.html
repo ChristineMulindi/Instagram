@@ -1,17 +1,31 @@
 {%extends 'base.html'%}
 {% block content %}
 <div class="container">
-    <div class="col-md-2 col-xs-1"></div>
-    <div class="col-md-8 col-xs-10">
-        {% if users %}
-        {% for user in users %}
-        Username: <p>{{user.username}}</p>
-        Bio: <p>{{user.bio}}</p>
-        {% endfor %}
-        {% else %}
-        <p> Did not find usernames matching that username </p>
-        {% endif %}
+    <div class="row">
+        <div class="col-sm-1 col-md-2 col-xs-1"></div>
+        <div class="col-sm-8 col-md-8 col-xs-1 shadow p-3 mb-5 bg-white rounded">
+
+            {% if users%}
+            <h2>Found {{ users|length }} of searched user {{message}}</h2>
+            {% else %}
+            <h2> Found 0 users for the search user {{message}}</h2>
+            {% endif %}
+        </div>
+        <div class="col-sm-1 col-md-2 col-xs-1"></div>
     </div>
-    <div class="col-md-2 col-xs-1"></div>
-      {% endblock %}
+
+
+    {% for user in users %}
+    <div class="row">
+        <div class="col-sm-1 col-md-2 col-xs-1"></div>
+        <div class="col-sm-8 col-md-8 col-xs-1 shadow p-3 mb-5 bg-white rounded">
+
+            <img style="border-radius:30px;width:30px;height:30px;" class="rounded-circle"
+                src="{{ user.profile_path.url }}"> &nbsp;{{user.username }}
+
+        </div>
+        <div class="col-sm-1 col-md-2 col-xs-1"></div>
+    </div>
+    {% endfor %}
+    {% endblock %}
 </div>
