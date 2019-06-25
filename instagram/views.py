@@ -18,12 +18,15 @@ def home(request):
 
 def get_search(request):
     profile = Profile.objects.all
+    print(profile)
     if 'user' in request.GET and request.GET["user"]:
         search_word = request.GET.get("user")
-        searched_users = User.object.filter(username__icontains=search_word)
+        print(search_word)
+        searched_users= User.objects.filter(username__icontains=search_word)
+        print(searched_users)
         message = f"{search_word}"
 
-        return render(request, 'searched.html',{"message":message,"users": searched_users,"profile":profile})
+        return render(request, 'search.html',{"message":message,"users": searched_users,"profile":profile})
 
     else:
         message = "You haven't searched for anyone"
